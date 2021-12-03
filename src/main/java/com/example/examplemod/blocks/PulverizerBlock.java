@@ -10,9 +10,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import org.jetbrains.annotations.Nullable;
 
-public class Pulverizer extends BlockEntityBase {
-    public Pulverizer() {
-        super(Properties.of(Material.STONE), "pulverizer");
+public class PulverizerBlock extends BlockEntityBase {
+
+    public PulverizerBlock() {
+        super(Properties.of(Material.STONE), "pulverizer", PulverizerEntity::new);
     }
 
     @Nullable

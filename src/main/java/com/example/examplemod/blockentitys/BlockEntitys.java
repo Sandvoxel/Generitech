@@ -9,7 +9,8 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public enum BlockEntitys {
-    PULVERIZER(PulverizerEntity::new, Blocks.PULVERIZER.getBlock());
+    PULVERIZER(PulverizerEntity::new, Blocks.PULVERIZER.getBlock()),
+    POWER_FURNACE(PowerFurnaceEntity::new, Blocks.POWER_FURNACE.getBlock());
 
 
     private final BlockEntityType<?> entityType;
