@@ -12,12 +12,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
-@Mod("examplemod")
-public class ExampleMod {
+@Mod("generitech")
+public class Generitech {
     // Directly reference a log4j logger.
     public static final Logger LOGGER = LogManager.getLogger("EX MOD");
 
-    public ExampleMod() {
+    public Generitech() {
         // Register the setup method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         // Register the enqueueIMC method for modloading

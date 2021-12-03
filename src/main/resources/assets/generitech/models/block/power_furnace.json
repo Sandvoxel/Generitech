@@ -1,0 +1,10 @@
+{
+  "__comment": "Add the following line on the same level as a 'model' declaration.",
+  "loader": "forge:obj",
+  "flip-v": true,
+  "model": "generitech:models/block/furnace.obj",
+  "textures": {
+    "texture0": "generitech:block/yesyesyes",
+    "particle": "generitech:block/yesyesyes"
+  }
+}
