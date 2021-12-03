@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import java.util.Arrays;
 import java.util.Objects;
 
-public enum BlockEntitys {
+public enum BlockEntities {
     PULVERIZER(PulverizerEntity::new, Blocks.PULVERIZER.getBlock()),
     POWER_FURNACE(PowerFurnaceEntity::new, Blocks.POWER_FURNACE.getBlock());
 
@@ -16,14 +16,14 @@ public enum BlockEntitys {
     private final BlockEntityType<?> entityType;
 
 
-    BlockEntitys(BlockEntityType.BlockEntitySupplier<? extends BlockEntity> entityType, Block... blocks) {
+    BlockEntities(BlockEntityType.BlockEntitySupplier<? extends BlockEntity> entityType, Block... blocks) {
         this.entityType = BlockEntityType.Builder.of(entityType, blocks).build(null);
         this.entityType.setRegistryName(Objects.requireNonNull(blocks[0].getRegistryName()) + "entity");
     }
 
 
     public static BlockEntityType<?>[] getBlockEntitys() {
-        return Arrays.stream(values()).map(BlockEntitys::getEntityType).toArray(BlockEntityType[]::new);
+        return Arrays.stream(values()).map(BlockEntities::getEntityType).toArray(BlockEntityType[]::new);
     }
 
     public BlockEntityType<?> getEntityType() {

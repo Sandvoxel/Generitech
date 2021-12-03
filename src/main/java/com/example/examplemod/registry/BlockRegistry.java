@@ -1,6 +1,6 @@
 package com.example.examplemod.registry;
 
-import com.example.examplemod.blockentitys.BlockEntitys;
+import com.example.examplemod.blockentitys.BlockEntities;
 import com.example.examplemod.blocks.Blocks;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -24,6 +24,6 @@ public class BlockRegistry {
 
     @SubscribeEvent
     public static void registerTE(RegistryEvent.Register<BlockEntityType<?>> evt) {
-        evt.getRegistry().registerAll(BlockEntitys.getBlockEntitys());
+        evt.getRegistry().registerAll(BlockEntities.getBlockEntitys());
     }
 }

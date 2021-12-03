@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class PulverizerEntity extends BlockEntity {
 
     public PulverizerEntity(BlockPos blockPos, BlockState blockState) {
-        super(BlockEntitys.PULVERIZER.getEntityType(), blockPos, blockState);
+        super(BlockEntities.PULVERIZER.getEntityType(), blockPos, blockState);
     }
 
 

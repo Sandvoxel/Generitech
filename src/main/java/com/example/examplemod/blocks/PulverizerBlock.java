@@ -1,6 +1,6 @@
 package com.example.examplemod.blocks;
 
-import com.example.examplemod.blockentitys.BlockEntitys;
+import com.example.examplemod.blockentitys.BlockEntities;
 import com.example.examplemod.blockentitys.PulverizerEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -19,6 +19,6 @@ public class PulverizerBlock extends BlockEntityBase {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
-        return BlockEntitys.PULVERIZER.getEntityType() == blockEntityType ? PulverizerEntity::tick : null;
+        return BlockEntities.PULVERIZER.getEntityType() == blockEntityType ? PulverizerEntity::tick : null;
     }
 }
