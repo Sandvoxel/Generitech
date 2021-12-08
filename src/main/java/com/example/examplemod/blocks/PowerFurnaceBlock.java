@@ -28,7 +28,6 @@ public class PowerFurnaceBlock extends BlockEntityBase implements Wearable {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
-        Generitech.LOGGER.info("How offen is this called?");
         return BlockEntities.POWER_FURNACE.getEntityType() == blockEntityType ? PowerFurnaceEntity::tick : null;
     }
 
