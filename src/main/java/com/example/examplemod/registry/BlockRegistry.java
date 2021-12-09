@@ -2,6 +2,8 @@ package com.example.examplemod.registry;
 
 import com.example.examplemod.blockentitys.BlockEntities;
 import com.example.examplemod.blocks.Blocks;
+import com.example.examplemod.inventory.Menus;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -25,5 +27,10 @@ public class BlockRegistry {
     @SubscribeEvent
     public static void registerTE(RegistryEvent.Register<BlockEntityType<?>> evt) {
         evt.getRegistry().registerAll(BlockEntities.getBlockEntitys());
+    }
+
+    @SubscribeEvent
+    public static void registerMenus(RegistryEvent.Register<MenuType<?>> event){
+        //TODO register menus
     }
 }
