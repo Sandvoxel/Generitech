@@ -1,6 +1,6 @@
 package com.example.examplemod.blockentitys;
 
-import com.example.examplemod.blocks.Blocks;
+import com.example.examplemod.blocks.GTBlocks;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -9,8 +9,8 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public enum BlockEntities {
-    PULVERIZER(PulverizerEntity::new, Blocks.PULVERIZER.getBlock()),
-    POWER_FURNACE(PowerFurnaceEntity::new, Blocks.POWER_FURNACE.getBlock());
+    PULVERIZER(PulverizerEntity::new, GTBlocks.PULVERIZER.getBlock()),
+    POWER_FURNACE(PowerFurnaceEntity::new, GTBlocks.POWER_FURNACE.getBlock());
 
 
     private final BlockEntityType<?> entityType;

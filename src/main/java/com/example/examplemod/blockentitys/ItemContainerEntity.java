@@ -17,10 +17,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.Random;
 
 public abstract class ItemContainerEntity extends BlockEntity implements Container, MenuProvider, WorldlyContainer {
-    protected ItemContainer itemContainer = new ItemContainer(3);
+    protected ItemContainer itemContainer;
 
-    public ItemContainerEntity(BlockEntityType<?> p_155228_, BlockPos p_155229_, BlockState p_155230_) {
-        super(p_155228_, p_155229_, p_155230_);
+    public ItemContainerEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState blockState, int containerSize) {
+        super(blockEntityType, pos, blockState);
+        this.itemContainer = new ItemContainer(containerSize);
     }
 
     @Override

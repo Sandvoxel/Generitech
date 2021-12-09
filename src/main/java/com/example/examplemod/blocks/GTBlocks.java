@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.Block;
 import java.util.Arrays;
 import java.util.Objects;
 
-public enum Blocks {
+public enum GTBlocks {
     TEST_BLOCK(new TestBlock()),
     PULVERIZER(new PulverizerBlock()),
     POWER_FURNACE(new PowerFurnaceBlock());
@@ -18,7 +18,7 @@ public enum Blocks {
     private final BlockBase block;
     private final Item blockitem;
 
-    Blocks(BlockBase blockBase) {
+    GTBlocks(BlockBase blockBase) {
         block = blockBase;
         blockitem = new BlockItem(blockBase,
                 new Item.Properties()).setRegistryName(
@@ -28,13 +28,13 @@ public enum Blocks {
 
     public static Block[] getBlocks() {
         return Arrays.stream(values())
-                .map(Blocks::getBlock)
+                .map(GTBlocks::getBlock)
                 .toArray(Block[]::new);
     }
 
     public static Item[] getBlockItems() {
         return Arrays.stream(values())
-                .map(Blocks::getBlockItem)
+                .map(GTBlocks::getBlockItem)
                 .toArray(Item[]::new);
     }
 

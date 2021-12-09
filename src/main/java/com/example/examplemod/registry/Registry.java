@@ -1,7 +1,8 @@
 package com.example.examplemod.registry;
 
 import com.example.examplemod.blockentitys.BlockEntities;
-import com.example.examplemod.blocks.Blocks;
+import com.example.examplemod.blocks.GTBlocks;
+import com.example.examplemod.items.GTItems;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -11,15 +12,16 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-public class BlockRegistry {
+public class Registry {
     @SubscribeEvent
     public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
-        blockRegistryEvent.getRegistry().registerAll(Blocks.getBlocks());
+        blockRegistryEvent.getRegistry().registerAll(GTBlocks.getBlocks());
     }
 
     @SubscribeEvent
-    public static void onItemsRegistry(final RegistryEvent.Register<Item> blockRegistryEvent) {
-        blockRegistryEvent.getRegistry().registerAll(Blocks.getBlockItems());
+    public static void onItemsRegistry(final RegistryEvent.Register<Item> itemRegistryEvent) {
+        itemRegistryEvent.getRegistry().registerAll(GTBlocks.getBlockItems());
+        itemRegistryEvent.getRegistry().registerAll(GTItems.getItems());
     }
 
 
