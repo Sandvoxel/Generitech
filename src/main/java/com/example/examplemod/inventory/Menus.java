@@ -1,7 +1,6 @@
 package com.example.examplemod.inventory;
 
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ItemCombinerMenu;
 import net.minecraft.world.inventory.MenuType;
 
 import java.util.Arrays;

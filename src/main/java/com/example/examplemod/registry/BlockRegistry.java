@@ -2,7 +2,6 @@ package com.example.examplemod.registry;
 
 import com.example.examplemod.blockentitys.BlockEntities;
 import com.example.examplemod.blocks.Blocks;
-import com.example.examplemod.inventory.Menus;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
