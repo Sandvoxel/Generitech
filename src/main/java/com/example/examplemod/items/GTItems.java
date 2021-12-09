@@ -1,7 +1,7 @@
 package com.example.examplemod.items;
 
 import com.example.examplemod.items.dust.IronDust;
-import com.example.examplemod.items.parts.FurnacePartItem;
+import com.example.examplemod.items.parts.CrusherPartItem;
 import net.minecraft.world.item.Item;
 
 import java.util.Arrays;
@@ -9,7 +9,7 @@ import java.util.Arrays;
 public enum GTItems {
     TEST(new TestItem()),
     IRON_DUST(new IronDust()),
-    FURNACE_PART(new FurnacePartItem());
+    FURNACE_PART(new CrusherPartItem());
 
     ItemBase itemBase;
 
