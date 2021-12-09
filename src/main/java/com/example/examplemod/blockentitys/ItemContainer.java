@@ -1,11 +1,11 @@
 package com.example.examplemod.blockentitys;
 
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import org.lwjgl.system.CallbackI;
 
 import java.util.Arrays;
-import java.util.Objects;
 
 public class ItemContainer {
     private ItemStack[] items;
@@ -34,6 +34,7 @@ public class ItemContainer {
 
         if(newItemstackCount <= 0){
             items[index] = ItemStack.EMPTY;
+            return new ItemStack(item,amount);
         }
 
         items[index].setCount(newItemstackCount);
@@ -50,6 +51,34 @@ public class ItemContainer {
         items[index] = itemStack;
     }
 
+    public void clearSlot(int index){
+        setItem(index, ItemStack.EMPTY);
+    }
+
+    public void addItemStack(int index, ItemStack itemStack){
+        addItemStack(index, index+1, itemStack);
+    }
+
+    public void addItemStack(int start, int end, ItemStack itemStack){
+        Item item =  itemStack.getItem();
+        for (int i = start; i < end; i++){
+            if(items[i].isEmpty()){
+                items[i] = itemStack;
+                return;
+            }
+            if(items[i].getItem() == item){
+                int freeStackSpace = items[i].getCount() - MAX_STACK_SIZE;
+                itemStack.setCount(itemStack.getCount() + freeStackSpace);
+                items[i].setCount(MAX_STACK_SIZE);
+            }
+
+        }
+    }
+
+    public ItemStack decrementItem(int index){
+        return removeItem(index,1);
+    }
+
     public int getMaxStackSize(){
         return MAX_STACK_SIZE;
     }
@@ -58,5 +87,39 @@ public class ItemContainer {
         Arrays.fill(items, ItemStack.EMPTY);
     }
 
+    public void loadAllItems(CompoundTag compoundTag) {
+        ListTag listtag = compoundTag.getList("Items", 10);
 
+        for(int i = 0; i < listtag.size(); ++i) {
+            CompoundTag compoundtag = listtag.getCompound(i);
+            int j = compoundtag.getByte("Slot") & 255;
+            if (j < items.length) {
+                setItem(j, ItemStack.of(compoundtag));
+            }
+        }
+
+    }
+    public CompoundTag saveAllItems(CompoundTag compoundTag) {
+        ListTag listtag = new ListTag();
+
+        for(int i = 0; i < items.length; ++i) {
+            ItemStack itemstack = items[i];
+            if (!itemstack.isEmpty()) {
+                CompoundTag compoundtag = new CompoundTag();
+                compoundtag.putByte("Slot", (byte)i);
+                itemstack.save(compoundtag);
+                listtag.add(compoundtag);
+            }
+        }
+        compoundTag.put("Items", listtag);
+
+
+        return compoundTag;
+    }
+
+
+
+    public ItemStack[] getItems() {
+        return Arrays.stream(items).filter(x -> !x.isEmpty()).toArray(ItemStack[]::new);
+    }
 }

@@ -1,19 +1,28 @@
 package com.example.examplemod.blockentitys;
 
+import com.example.examplemod.Generitech;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.Container;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class ItemContainerEntity extends BlockEntity implements Container, MenuProvider {
+import java.util.Random;
+
+public abstract class ItemContainerEntity extends BlockEntity implements Container, MenuProvider, WorldlyContainer {
     protected ItemContainer itemContainer = new ItemContainer(3);
 
     public ItemContainerEntity(BlockEntityType<?> p_155228_, BlockPos p_155229_, BlockState p_155230_) {
@@ -69,10 +78,52 @@ public abstract class ItemContainerEntity extends BlockEntity implements Contain
         itemContainer.clearContent();
     }
 
-    @Nullable
+    public void dropItems(Level world, BlockPos pos){
+        final Random RANDOM = new Random();
+
+        double d0 = EntityType.ITEM.getWidth();
+        double d1 = 1.0D - d0;
+        double d2 = d0 / 2.0D;
+        double d3 = Math.floor(pos.getX()) + RANDOM.nextDouble() * d1 + d2;
+        double d4 = Math.floor(pos.getY()) + RANDOM.nextDouble() * d1;
+        double d5 = Math.floor(pos.getZ()) + RANDOM.nextDouble() * d1 + d2;
+
+        for(ItemStack itemStack : itemContainer.getItems()){
+            while(!itemStack.isEmpty()) {
+                ItemEntity itementity = new ItemEntity(world, d3, d4, d5, itemStack.split(RANDOM.nextInt(21) + 10));
+                float f = 0.05F;
+                itementity.setDeltaMovement(RANDOM.nextGaussian() * (double)0.05F, RANDOM.nextGaussian() * (double)0.05F + (double)0.2F, RANDOM.nextGaussian() * (double)0.05F);
+                world.addFreshEntity(itementity);
+            }
+        }
+
+    }
+
     @Override
-    public AbstractContainerMenu createMenu(int index, Inventory inventory, Player player) {
-        return null;
+    public void load(CompoundTag compoundTag) {
+        itemContainer.loadAllItems(compoundTag);
+    }
+
+    @Override
+    protected void saveAdditional(CompoundTag compoundTag) {
+        itemContainer.saveAllItems(compoundTag);
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
