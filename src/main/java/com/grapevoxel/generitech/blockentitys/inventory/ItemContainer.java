@@ -75,42 +75,63 @@ public class ItemContainer implements Container {
     /**
      * Must Call <code>canPlaceStack</code> before this to make sure will su
      * @param startIndex - starting index in the inventory
-     * @param endIndex - ending index of the inventory
+     * @param numOfSlot - number of slot to try to place in
      * @param itemStack - the stack to place in the provided range of slots
      */
-    public boolean addItemStack(int startIndex, int endIndex, ItemStack itemStack){
-        if(!canPlaceStack(startIndex,endIndex,itemStack))
-            return false;
+    public void addItemStack(int startIndex, int numOfSlot, ItemStack itemStack){
+        if(!canPlaceStack(startIndex,numOfSlot,itemStack))
+            return;
 
         Item item =  itemStack.getItem();
-        for (int i = startIndex; i < endIndex; i++){
+        for (int i = startIndex; i < startIndex + numOfSlot; i++){
             if(items[i].isEmpty()){
                 items[i] = itemStack;
-                return true;
+                return;
             }
+            if(items[i].getCount() >= itemStack.getMaxStackSize()){
+                continue;
+            }
+
             if(items[i].getItem() == item){
                 int freeStackSpace = itemStack.getMaxStackSize() - items[i].getCount();
-                items[i].setCount((freeStackSpace - itemStack.getCount()) + items[i].getCount());
-                itemStack.setCount(itemStack.getMaxStackSize() - (freeStackSpace - itemStack.getCount()));
+                int amountToPutInSlot = Math.min(itemStack.getCount(), freeStackSpace);
+
+                items[i].setCount(amountToPutInSlot + items[i].getCount());
+                int leftOverItems = itemStack.getCount() - amountToPutInSlot;
+
+                if(leftOverItems <= 0)
+                    return;
+
+                itemStack.setCount(leftOverItems);
+
+
             }
         }
-        return true;
     }
 
     public ItemStack decrementItem(int index){
         return removeItem(index,1);
     }
 
-    public boolean canPlaceStack(int startIndex, int endIndex, ItemStack itemStack){
+    /**
+     * Check if item can be placed in a range of slots;
+     * @param startIndex the starting slot index
+     * @param numOfSlot the number of slots from the starting index to check
+     * @param itemStack the ItemStack to check against
+     * @return true or false on if you can fit the stack in given slots
+     */
+    public boolean canPlaceStack(int startIndex, int numOfSlot, ItemStack itemStack){
         int itemSpace = 0;
 
-        for (int i = startIndex; i < endIndex; i++) {
+        for (int i = startIndex; i < startIndex + numOfSlot; i++) {
             if(getItem(i).isEmpty() || getItem(i).sameItem(itemStack)){
-                itemSpace += itemStack.getMaxStackSize() - itemStack.getCount();
+                int freeStackSpace = itemStack.getMaxStackSize() - items[i].getCount();
+
+                itemSpace += Math.max(0,freeStackSpace) ;
             }
         }
 
-        return itemSpace <= itemStack.getCount();
+        return itemSpace >= itemStack.getCount();
     }
 
     @Override

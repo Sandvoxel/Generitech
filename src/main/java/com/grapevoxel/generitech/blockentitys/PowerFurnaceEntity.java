@@ -31,7 +31,6 @@ public class PowerFurnaceEntity extends ItemContainerEntity {
             return;
         powerFurnace.localTick(level, blockPos, blockState);
     }
-    //FIXME: Broken
     public void localTick(Level level, BlockPos blockPos, BlockState blockState){
         if(!(itemContainer.getItem(2).getItem() instanceof PartItem part))
             return;
@@ -44,12 +43,12 @@ public class PowerFurnaceEntity extends ItemContainerEntity {
 
         if(!itemContainer.getItem(1).isEmpty() && processTime <= 0){
             ItemStack processedItem = part.processResult(itemContainer.getItem(1));
-            itemContainer.addItemStack(5, processedItem);
+            itemContainer.addItemStack(4,2, processedItem);
             itemContainer.clearSlot(1);
         }
 
 
-        if(processTime > 0)
+        if(processTime > 0 && itemContainer.canPlaceStack(4,2, part.processResult(itemContainer.getItem(1))))
             processTime--;
 
 
