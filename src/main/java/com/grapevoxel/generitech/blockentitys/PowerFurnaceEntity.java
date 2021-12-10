@@ -24,13 +24,6 @@ public class PowerFurnaceEntity extends ItemContainerEntity {
         super(BlockEntities.POWER_FURNACE.getEntityType(), blockPos, blockState, 6);
     }
 
-
-    public static <T extends BlockEntity> void tick(Level level, BlockPos blockPos, BlockState blockState, T t) {
-        BlockEntity entity = level.getBlockEntity(blockPos);
-        if(!(entity instanceof PowerFurnaceEntity powerFurnace))
-            return;
-        powerFurnace.localTick(level, blockPos, blockState);
-    }
     public void localTick(Level level, BlockPos blockPos, BlockState blockState){
         if(!(itemContainer.getItem(2).getItem() instanceof PartItem part))
             return;
@@ -47,11 +40,8 @@ public class PowerFurnaceEntity extends ItemContainerEntity {
             itemContainer.clearSlot(1);
         }
 
-
         if(processTime > 0 && itemContainer.canPlaceStack(4,2, part.processResult(itemContainer.getItem(1))))
             processTime--;
-
-
 
     }
 

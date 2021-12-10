@@ -145,8 +145,8 @@ public class ItemContainer implements Container {
     }
 
     @Override
-    public boolean stillValid(Player p_18946_) {
-        return false;
+    public boolean stillValid(Player player) {
+        return true;
     }
 
     public void clearContent(){
