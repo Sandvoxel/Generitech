@@ -1,5 +1,6 @@
-package com.grapevoxel.generitech.blockentitys;
+package com.grapevoxel.generitech.blockentitys.inventory;
 
+import com.grapevoxel.generitech.blockentitys.inventory.ItemContainer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.MenuProvider;

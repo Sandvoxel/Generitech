@@ -1,18 +1,20 @@
-package com.grapevoxel.generitech.blockentitys;
+package com.grapevoxel.generitech.blockentitys.inventory;
 
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.world.Container;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 
-public class ItemContainer implements WorldlyContainer {
-    private ItemStack[] items;
+public class ItemContainer implements Container {
+    private final ItemStack[] items;
     private final int MAX_STACK_SIZE = 64;
 
     public ItemContainer(int size) {
@@ -20,18 +22,22 @@ public class ItemContainer implements WorldlyContainer {
         Arrays.fill(items, ItemStack.EMPTY);
     }
 
+    @Override
     public int getContainerSize(){
         return items.length;
     }
 
+    @Override
     public boolean isEmpty(){
         return Arrays.stream(items).allMatch(ItemStack::isEmpty);
     }
 
+    @Override
     public ItemStack getItem(int index){
         return items[index];
     }
 
+    @Override
     public ItemStack removeItem(int index, int amount){
         int newItemstackCount = items[index].getCount() - amount;
         Item item = items[index].getItem();
@@ -45,13 +51,15 @@ public class ItemContainer implements WorldlyContainer {
         return new ItemStack(item,amount);
     }
 
-    public ItemStack removeItemNoUpdate(int index){
+    @Override
+    public @NotNull ItemStack removeItemNoUpdate(int index){
         ItemStack removedItem = items[index];
         items[index] = ItemStack.EMPTY;
         return removedItem;
     }
 
-    public void setItem(int index, ItemStack itemStack){
+    @Override
+    public void setItem(int index, @NotNull ItemStack itemStack){
         items[index] = itemStack;
     }
 
@@ -63,26 +71,49 @@ public class ItemContainer implements WorldlyContainer {
         addItemStack(index, index+1, itemStack);
     }
 
-    public void addItemStack(int start, int end, ItemStack itemStack){
+
+    /**
+     * Must Call <code>canPlaceStack</code> before this to make sure will su
+     * @param startIndex - starting index in the inventory
+     * @param endIndex - ending index of the inventory
+     * @param itemStack - the stack to place in the provided range of slots
+     */
+    public boolean addItemStack(int startIndex, int endIndex, ItemStack itemStack){
+        if(!canPlaceStack(startIndex,endIndex,itemStack))
+            return false;
+
         Item item =  itemStack.getItem();
-        for (int i = start; i < end; i++){
+        for (int i = startIndex; i < endIndex; i++){
             if(items[i].isEmpty()){
                 items[i] = itemStack;
-                return;
+                return true;
             }
             if(items[i].getItem() == item){
-                int freeStackSpace = items[i].getCount() - MAX_STACK_SIZE;
-                itemStack.setCount(itemStack.getCount() + freeStackSpace);
-                items[i].setCount(MAX_STACK_SIZE);
+                int freeStackSpace = itemStack.getMaxStackSize() - items[i].getCount();
+                items[i].setCount((freeStackSpace - itemStack.getCount()) + items[i].getCount());
+                itemStack.setCount(itemStack.getMaxStackSize() - (freeStackSpace - itemStack.getCount()));
             }
-
         }
+        return true;
     }
 
     public ItemStack decrementItem(int index){
         return removeItem(index,1);
     }
 
+    public boolean canPlaceStack(int startIndex, int endIndex, ItemStack itemStack){
+        int itemSpace = 0;
+
+        for (int i = startIndex; i < endIndex; i++) {
+            if(getItem(i).isEmpty() || getItem(i).sameItem(itemStack)){
+                itemSpace += itemStack.getMaxStackSize() - itemStack.getCount();
+            }
+        }
+
+        return itemSpace <= itemStack.getCount();
+    }
+
+    @Override
     public int getMaxStackSize(){
         return MAX_STACK_SIZE;
     }
@@ -137,18 +168,4 @@ public class ItemContainer implements WorldlyContainer {
         return Arrays.stream(items).filter(x -> !x.isEmpty()).toArray(ItemStack[]::new);
     }
 
-    @Override
-    public int[] getSlotsForFace(Direction p_19238_) {
-        return new int[0];
-    }
-
-    @Override
-    public boolean canPlaceItemThroughFace(int p_19235_, ItemStack p_19236_, @Nullable Direction p_19237_) {
-        return false;
-    }
-
-    @Override
-    public boolean canTakeItemThroughFace(int p_19239_, ItemStack p_19240_, Direction p_19241_) {
-        return false;
-    }
 }
