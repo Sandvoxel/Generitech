@@ -1,7 +1,7 @@
 package com.grapevoxel.generitech.blocks;
 
 import com.grapevoxel.generitech.blockentitys.BlockEntities;
-import com.grapevoxel.generitech.blockentitys.ItemContainerEntity;
+import com.grapevoxel.generitech.blockentitys.inventory.ItemContainerEntity;
 import com.grapevoxel.generitech.blockentitys.PowerFurnaceEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;

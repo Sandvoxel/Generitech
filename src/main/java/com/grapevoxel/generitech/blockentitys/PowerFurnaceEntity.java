@@ -1,6 +1,7 @@
 package com.grapevoxel.generitech.blockentitys;
 
 import com.grapevoxel.generitech.api.PartItem;
+import com.grapevoxel.generitech.blockentitys.inventory.ItemContainerEntity;
 import com.grapevoxel.generitech.inventory.PowerFurnaceMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -30,7 +31,7 @@ public class PowerFurnaceEntity extends ItemContainerEntity {
             return;
         powerFurnace.localTick(level, blockPos, blockState);
     }
-
+    //FIXME: Broken
     public void localTick(Level level, BlockPos blockPos, BlockState blockState){
         if(!(itemContainer.getItem(2).getItem() instanceof PartItem part))
             return;
