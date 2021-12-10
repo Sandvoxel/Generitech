@@ -1,6 +1,7 @@
 package com.example.examplemod.blockentitys;
 
 import com.example.examplemod.api.PartItem;
+import com.example.examplemod.inventory.PowerFurnaceMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -14,7 +15,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public class PowerFurnaceEntity extends ItemContainerEntity{
+public class PowerFurnaceEntity extends ItemContainerEntity {
 
     private int processTime;
 
@@ -84,7 +85,11 @@ public class PowerFurnaceEntity extends ItemContainerEntity{
 
     @Nullable
     @Override
-    public AbstractContainerMenu createMenu(int index, Inventory inventory, Player player) {
-        return null;
+    public AbstractContainerMenu createMenu(int containerId, Inventory inventory, Player player) {
+        return new PowerFurnaceMenu(containerId, inventory, this);
+    }
+
+    public int getProcessTime() {
+        return processTime;
     }
 }

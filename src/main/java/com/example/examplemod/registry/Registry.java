@@ -2,6 +2,7 @@ package com.example.examplemod.registry;
 
 import com.example.examplemod.blockentitys.BlockEntities;
 import com.example.examplemod.blocks.GTBlocks;
+import com.example.examplemod.inventory.Menus;
 import com.example.examplemod.items.GTItems;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
@@ -32,6 +33,8 @@ public class Registry {
 
     @SubscribeEvent
     public static void registerMenus(RegistryEvent.Register<MenuType<?>> event){
-        //TODO register menus
+        event.getRegistry().registerAll(Menus.getMenuTypes());
     }
+
+    //public static void registerScreens(RegistryEvent.Register)
 }

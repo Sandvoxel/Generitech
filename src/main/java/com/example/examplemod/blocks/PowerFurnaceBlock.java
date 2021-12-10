@@ -35,7 +35,16 @@ public class PowerFurnaceBlock extends BlockEntityBase implements Wearable {
 
     @Override
     public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
-        return super.use(blockState, level, blockPos, player, interactionHand, blockHitResult);
+        if (level.isClientSide) {
+            return InteractionResult.SUCCESS;
+        } else {
+            BlockEntity blockEntity = level.getBlockEntity(blockPos);
+            if (blockEntity instanceof PowerFurnaceEntity) {
+                player.openMenu((PowerFurnaceEntity)blockEntity);
+            }
+
+            return InteractionResult.CONSUME;
+        }
     }
 
     @Override
@@ -47,4 +56,6 @@ public class PowerFurnaceBlock extends BlockEntityBase implements Wearable {
 
         return super.onDestroyedByPlayer(state,world,pos,player,willHarvest,fluid);
     }
+
+
 }

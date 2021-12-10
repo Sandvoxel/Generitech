@@ -16,7 +16,8 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Random;
 
-public abstract class ItemContainerEntity extends BlockEntity implements Container, MenuProvider, WorldlyContainer {
+public abstract class ItemContainerEntity extends BlockEntity implements MenuProvider, WorldlyContainer {
+    //TODO: abstract all of Container into ItemContainer specifically
     protected ItemContainer itemContainer;
 
     public ItemContainerEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState blockState, int containerSize) {
@@ -104,6 +105,9 @@ public abstract class ItemContainerEntity extends BlockEntity implements Contain
         itemContainer.saveAllItems(compoundTag);
     }
 
+    public ItemContainer getItemContainer() {
+        return itemContainer;
+    }
 }
 
 

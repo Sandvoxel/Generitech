@@ -1,13 +1,17 @@
 package com.example.examplemod.blockentitys;
 
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 
-public class ItemContainer {
+public class ItemContainer implements WorldlyContainer {
     private ItemStack[] items;
     private final int MAX_STACK_SIZE = 64;
 
@@ -83,6 +87,16 @@ public class ItemContainer {
         return MAX_STACK_SIZE;
     }
 
+    @Override
+    public void setChanged() {
+
+    }
+
+    @Override
+    public boolean stillValid(Player p_18946_) {
+        return false;
+    }
+
     public void clearContent(){
         Arrays.fill(items, ItemStack.EMPTY);
     }
@@ -121,5 +135,20 @@ public class ItemContainer {
 
     public ItemStack[] getItems() {
         return Arrays.stream(items).filter(x -> !x.isEmpty()).toArray(ItemStack[]::new);
+    }
+
+    @Override
+    public int[] getSlotsForFace(Direction p_19238_) {
+        return new int[0];
+    }
+
+    @Override
+    public boolean canPlaceItemThroughFace(int p_19235_, ItemStack p_19236_, @Nullable Direction p_19237_) {
+        return false;
+    }
+
+    @Override
+    public boolean canTakeItemThroughFace(int p_19239_, ItemStack p_19240_, Direction p_19241_) {
+        return false;
     }
 }

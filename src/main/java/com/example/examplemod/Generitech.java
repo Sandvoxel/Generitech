@@ -1,9 +1,16 @@
 package com.example.examplemod;
 
+import com.example.examplemod.client.PowerFurnaceScreen;
+import com.example.examplemod.inventory.Menus;
+import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
@@ -27,6 +34,11 @@ public class Generitech {
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
+
+        DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
+            // Client setup
+            FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupClient);
+        });
     }
 
     private void setup(final FMLCommonSetupEvent event) {
@@ -43,6 +55,11 @@ public class Generitech {
         /*LOGGER.info("Got IMC {}", event.getIMCStream().
                 map(m->m.messageSupplier().get()).
                 collect(Collectors.toList()));*/
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    private void setupClient(final FMLClientSetupEvent event) {
+        Menus.registerScreens();
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
