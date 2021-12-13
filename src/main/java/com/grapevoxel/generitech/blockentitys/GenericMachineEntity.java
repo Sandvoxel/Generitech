@@ -12,15 +12,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public class PowerFurnaceEntity extends ItemContainerEntity {
+public class GenericMachineEntity extends ItemContainerEntity {
 
     private int processTime;
 
-    public PowerFurnaceEntity(BlockPos blockPos, BlockState blockState) {
+    public GenericMachineEntity(BlockPos blockPos, BlockState blockState) {
         super(BlockEntities.POWER_FURNACE.getEntityType(), blockPos, blockState, 6);
     }
 

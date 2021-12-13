@@ -9,14 +9,14 @@ import java.util.Arrays;
 public enum GTItems {
     TEST(new TestItem()),
     IRON_DUST(new IronDust()),
-    FURNACE_PART(new FurnacePartItem());
+    FURNACE_PART(new FurnacePartItem()),
+    WRENCH(new Wrench());
 
-    ItemBase itemBase;
+    private final ItemBase itemBase;
 
     GTItems(ItemBase itemBase) {
         this.itemBase = itemBase;
     }
-
 
     public static Item[] getItems(){
         return Arrays.stream(values()).map(GTItems::getItem).toArray(Item[]::new);

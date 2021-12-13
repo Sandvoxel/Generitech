@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "generitech:block/generic_machine"
+    }
+  }
+}

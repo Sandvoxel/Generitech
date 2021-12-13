@@ -2,7 +2,7 @@ package com.grapevoxel.generitech.blocks;
 
 import com.grapevoxel.generitech.blockentitys.BlockEntities;
 import com.grapevoxel.generitech.blockentitys.inventory.ItemContainerEntity;
-import com.grapevoxel.generitech.blockentitys.PowerFurnaceEntity;
+import com.grapevoxel.generitech.blockentitys.GenericMachineEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -18,20 +18,20 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
-public class PowerFurnaceBlock extends BlockEntityBase implements Wearable {
+public class GenericMachineBlock extends BlockEntityBase implements Wearable {
 
     //TODO: Wearable machines (on head)
     //TODO: Abstract common methods into a new parent Abstract Class BlockInteractableBase
 
-    public PowerFurnaceBlock() {
-        super(Properties.of(Material.METAL), "power_furnace", PowerFurnaceEntity::new);
+    public GenericMachineBlock() {
+        super(Properties.of(Material.METAL), "generic_machine", GenericMachineEntity::new);
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
 
-        return BlockEntities.POWER_FURNACE.getEntityType() == blockEntityType ? PowerFurnaceEntity::tick : null;
+        return BlockEntities.POWER_FURNACE.getEntityType() == blockEntityType ? GenericMachineEntity::tick : null;
     }
 
     @Override
@@ -40,8 +40,8 @@ public class PowerFurnaceBlock extends BlockEntityBase implements Wearable {
             return InteractionResult.SUCCESS;
         } else {
             BlockEntity blockEntity = level.getBlockEntity(blockPos);
-            if (blockEntity instanceof PowerFurnaceEntity) {
-                player.openMenu((PowerFurnaceEntity)blockEntity);
+            if (blockEntity instanceof GenericMachineEntity) {
+                player.openMenu((GenericMachineEntity)blockEntity);
             }
 
             return InteractionResult.CONSUME;

@@ -38,7 +38,7 @@ public class FurnacePartItem extends ItemBase  implements PartItem {
 
     @Override
     public int processTicks(ItemStack itemStack) {
-        return 80;
+        return 200;
     }
 
     @Override
