@@ -82,6 +82,8 @@ public class ItemContainer implements Container {
         if(!canPlaceStack(startIndex,numOfSlot,itemStack))
             return;
 
+        itemStack = itemStack.copy();
+
         Item item =  itemStack.getItem();
         for (int i = startIndex; i < startIndex + numOfSlot; i++){
             if(items[i].isEmpty()){

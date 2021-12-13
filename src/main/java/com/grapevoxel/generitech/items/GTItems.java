@@ -1,7 +1,7 @@
 package com.grapevoxel.generitech.items;
 
 import com.grapevoxel.generitech.items.dust.IronDust;
-import com.grapevoxel.generitech.items.parts.CrusherPartItem;
+import com.grapevoxel.generitech.items.parts.FurnacePartItem;
 import net.minecraft.world.item.Item;
 
 import java.util.Arrays;
@@ -9,7 +9,7 @@ import java.util.Arrays;
 public enum GTItems {
     TEST(new TestItem()),
     IRON_DUST(new IronDust()),
-    FURNACE_PART(new CrusherPartItem());
+    FURNACE_PART(new FurnacePartItem());
 
     ItemBase itemBase;
 

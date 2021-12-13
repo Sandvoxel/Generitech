@@ -28,19 +28,19 @@ public class PowerFurnaceEntity extends ItemContainerEntity {
         if(!(itemContainer.getItem(2).getItem() instanceof PartItem part))
             return;
 
-        if(itemContainer.getItem(1).isEmpty() && part.canProcess(itemContainer.getItem(0))){
+        if(itemContainer.getItem(1).isEmpty() && part.canProcess(itemContainer.getItem(0), level)){
             itemContainer.addItemStack(1, new ItemStack(itemContainer.getItem(0).getItem(),1));
             itemContainer.decrementItem(0);
             this.processTime = part.processTicks(itemContainer.getItem(1));
         }
 
         if(!itemContainer.getItem(1).isEmpty() && processTime <= 0){
-            ItemStack processedItem = part.processResult(itemContainer.getItem(1));
+            ItemStack processedItem = part.processResult(itemContainer.getItem(1), level);
             itemContainer.addItemStack(4,2, processedItem);
             itemContainer.clearSlot(1);
         }
 
-        if(processTime > 0 && itemContainer.canPlaceStack(4,2, part.processResult(itemContainer.getItem(1))))
+        if(processTime > 0 && itemContainer.canPlaceStack(4,2, part.processResult(itemContainer.getItem(1), level)))
             processTime--;
 
     }
