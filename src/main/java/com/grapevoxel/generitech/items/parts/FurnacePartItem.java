@@ -15,6 +15,8 @@ public class FurnacePartItem extends ItemBase  implements PartItem {
         super(new Item.Properties(), "furnacepartitem");
     }
 
+    //TODO: return XP, get process time from getRecipeManager
+
     @Override
     public ItemStack processResult(ItemStack itemStack, Level level) {
         if(!canProcess(itemStack, level))
@@ -27,7 +29,10 @@ public class FurnacePartItem extends ItemBase  implements PartItem {
         if(recipe == null)
             return ItemStack.EMPTY;
 
-        return recipe.getResultItem().copy();
+        ItemStack output = recipe.getResultItem().copy();
+        output.setCount(output.getCount() * itemStack.getCount());
+
+        return output;
     }
 
     @Override
@@ -46,10 +51,5 @@ public class FurnacePartItem extends ItemBase  implements PartItem {
         Recipe<?> recipe = level.getRecipeManager().getRecipeFor(RecipeType.SMELTING, container, level).orElse(null);
 
         return recipe != null;
-    }
-
-    @Override
-    public Recipe<?>[] getRecipes(Level level) {
-        return level.getRecipeManager().getAllRecipesFor(RecipeType.SMELTING).toArray(Recipe[]::new);
     }
 }

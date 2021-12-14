@@ -12,7 +12,4 @@ public interface PartItem {
     int processTicks(ItemStack itemStack);
 
     boolean canProcess(ItemStack itemStack, Level level);
-
-    Recipe<?>[] getRecipes(Level level);
-
 }
