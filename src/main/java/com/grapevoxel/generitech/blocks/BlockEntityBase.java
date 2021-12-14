@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class BlockEntityBase extends BlockBase implements EntityBlock {
+public abstract class BlockEntityBase extends BlockBase implements EntityBlock {
 
     private final BlockEntityType.BlockEntitySupplier<? extends BlockEntity> entityType;
 

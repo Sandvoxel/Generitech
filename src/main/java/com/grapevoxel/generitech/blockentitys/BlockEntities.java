@@ -10,7 +10,7 @@ import java.util.Objects;
 
 public enum BlockEntities {
     PULVERIZER(PulverizerEntity::new, GTBlocks.PULVERIZER.getBlock()),
-    POWER_FURNACE(PowerFurnaceEntity::new, GTBlocks.POWER_FURNACE.getBlock());
+    POWER_FURNACE(GenericMachineEntity::new, GTBlocks.POWER_FURNACE.getBlock());
 
 
     private final BlockEntityType<?> entityType;

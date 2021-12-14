@@ -1,6 +1,6 @@
 package com.grapevoxel.generitech.inventory;
 
-import com.grapevoxel.generitech.blockentitys.PowerFurnaceEntity;
+import com.grapevoxel.generitech.blockentitys.GenericMachineEntity;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -10,7 +10,7 @@ import net.minecraft.world.inventory.Slot;
 
 public class PowerFurnaceMenu extends AbstractContainerMenu {
 
-    private PowerFurnaceEntity powerFurnaceEntity = null;
+    private GenericMachineEntity genericMachineEntity = null;
 
     //TODO: clean up
     public PowerFurnaceMenu(int containerId, Inventory inventory) {
@@ -37,9 +37,9 @@ public class PowerFurnaceMenu extends AbstractContainerMenu {
             this.addSlot(new Slot(inventory, k, 8 + k * 18, 142));
         }
 
-        if (!(container instanceof PowerFurnaceEntity powerFurnaceEntity))
+        if (!(container instanceof GenericMachineEntity genericMachineEntity))
             return;
-        this.powerFurnaceEntity = powerFurnaceEntity;
+        this.genericMachineEntity = genericMachineEntity;
     }
 
     @Override
@@ -47,7 +47,7 @@ public class PowerFurnaceMenu extends AbstractContainerMenu {
         return true;
     }
 
-    public PowerFurnaceEntity getPowerFurnaceEntity() {
-        return powerFurnaceEntity;
+    public GenericMachineEntity getPowerFurnaceEntity() {
+        return genericMachineEntity;
     }
 }

@@ -10,7 +10,7 @@ import java.util.Objects;
 public enum GTBlocks {
     TEST_BLOCK(new TestBlock()),
     PULVERIZER(new PulverizerBlock()),
-    POWER_FURNACE(new PowerFurnaceBlock());
+    POWER_FURNACE(new GenericMachineBlock());
 
 
 

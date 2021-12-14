@@ -1,6 +1,6 @@
 package com.grapevoxel.generitech.client;
 
-import com.grapevoxel.generitech.blockentitys.PowerFurnaceEntity;
+import com.grapevoxel.generitech.blockentitys.GenericMachineEntity;
 import com.grapevoxel.generitech.inventory.PowerFurnaceMenu;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -18,11 +18,11 @@ public class PowerFurnaceScreen extends AbstractContainerScreen<PowerFurnaceMenu
     //TODO: Access PowerFurnaceEntity directly so we can make use of its variables
 
     private static final ResourceLocation CONTAINER_LOCATION = new ResourceLocation("generitech:textures/gui/container/machine.png");
-    private final PowerFurnaceEntity powerFurnaceEntity;
+    private final GenericMachineEntity genericMachineEntity;
 
     public PowerFurnaceScreen(PowerFurnaceMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component);
-        this.powerFurnaceEntity = menu.getPowerFurnaceEntity();
+        this.genericMachineEntity = menu.getPowerFurnaceEntity();
     }
 
     protected void init() {
