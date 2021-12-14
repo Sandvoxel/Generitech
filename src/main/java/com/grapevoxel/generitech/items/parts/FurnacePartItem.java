@@ -1,19 +1,13 @@
 package com.grapevoxel.generitech.items.parts;
 
 import com.grapevoxel.generitech.api.PartItem;
-import com.grapevoxel.generitech.items.GTItems;
 import com.grapevoxel.generitech.items.ItemBase;
-import com.grapevoxel.generitech.types.items.ItemRecipe;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class FurnacePartItem extends ItemBase  implements PartItem {
 
@@ -52,5 +46,10 @@ public class FurnacePartItem extends ItemBase  implements PartItem {
         Recipe<?> recipe = level.getRecipeManager().getRecipeFor(RecipeType.SMELTING, container, level).orElse(null);
 
         return recipe != null;
+    }
+
+    @Override
+    public Recipe<?>[] getRecipes(Level level) {
+        return level.getRecipeManager().getAllRecipesFor(RecipeType.SMELTING).toArray(Recipe[]::new);
     }
 }
