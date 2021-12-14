@@ -20,10 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 //TODO: Precompute map of Recipes upon machine being constructed
-public class GenericMachineEntity extends ItemContainerEntity {
+public class GenericMachineEntity extends MachineBaseEntity {
 
     private int processTime;
-    private static final int[] PART_SLOTS = {2,3};
 
 
     public GenericMachineEntity(BlockPos blockPos, BlockState blockState) {
@@ -63,7 +62,7 @@ public class GenericMachineEntity extends ItemContainerEntity {
 
         for (PartItem partItem : partItems) {
             if(partItem.canProcess(itemStack, level)){
-                processTicks = partItem.processTicks(itemStack);
+                processTicks += partItem.processTicks(itemStack);
             }
         }
         return processTicks;
@@ -100,17 +99,7 @@ public class GenericMachineEntity extends ItemContainerEntity {
         return true;
     }
 
-    public PartItem[] getItemParts(){
-        List<PartItem> partItems = new ArrayList<>();
 
-        for (int i : PART_SLOTS) {
-            if(itemContainer.getItem(i).getItem() instanceof PartItem part){
-                partItems.add(part);
-            }
-        }
-
-        return partItems.toArray(PartItem[]::new);
-    }
 
 
     @Override
