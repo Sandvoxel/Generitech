@@ -15,9 +15,9 @@ public abstract class TickableBlockEntity extends BlockEntity {
 		BlockEntity entity = level.getBlockEntity(blockPos);
 		if(!(entity instanceof TickableBlockEntity tickableBlockEntity))
 			return;
-		tickableBlockEntity.localTick(level, blockPos, blockState);
+		tickableBlockEntity.serverTick(level, blockPos, blockState);
 	}
 
-	public abstract void localTick(Level level, BlockPos blockPos, BlockState blockState);
+	public abstract void serverTick(Level level, BlockPos blockPos, BlockState blockState);
 
 	}
